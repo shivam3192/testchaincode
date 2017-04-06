@@ -101,7 +101,7 @@ func (t *CrowdFundChaincode) Query(stub shim.ChaincodeStubInterface, function st
         }
 
         // State variable "account"
-        var account string
+       // var account string
         // Any error to be reported back to the client
         var err error
 
