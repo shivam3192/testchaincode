@@ -56,18 +56,16 @@ func (t *CrowdFundChaincode) Init(stub shim.ChaincodeStubInterface, function str
 //
 func (t *CrowdFundChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
     
- var account string
-        
+var account string
+
         var err error
 
         if len(args) != 3 {
                 return nil, errors.New("Incorrect number of arguments. Expecting 2.")
         }
           account = args[0]
-        newinfo := Info{
-        qrcode: args[1],
-        count: args[2]}
-         recordByte, err := stub.getState(account);
+
+         recordByte, err := stub.GetState(account);
         if err != nil {
 
             return nil, err
@@ -81,15 +79,17 @@ func (t *CrowdFundChaincode) Invoke(stub shim.ChaincodeStubInterface, function s
         record.count = append(record.count,args[2]);
         newrecordByte, err := json.Marshal(record);
         if err!=nil {
+
             return nil, err
         }
-        err =stub.putState(account,newrecordByte);
+        err =stub.PutState(account,newrecordByte);
         if err != nil {
 
             return nil, err;
         } 
         return nil, nil
 }
+
 
 //
 // Query retrieves the state variable "account" and returns its current value
@@ -105,20 +105,20 @@ func (t *CrowdFundChaincode) Query(stub shim.ChaincodeStubInterface, function st
         // Any error to be reported back to the client
         var err error
 
-        if len(args) != 1 {
+         if len(args) != 1 {
                 return nil, errors.New("Incorrect number of arguments. Expecting name of the state variable to query.")
         }
 
         // Read in the name of the state variable to be returned
-        account = args[0]
-        information:=Info{}
+     var   account = args[0]
+     //   information:=Info{}
         // Get the current value of the state variable
-        accountValueBytes, err := stub.GetState(account)
-  /*      if err != nil {
-                jsonResp := "{\"Error\":\"Failed to get state for " + account + "\"}"
-   		 return nil, errors.New(jsonResp)
+        accountValueBytes ,err := stub.GetState(account)
+        if err != nil {
+              //  jsonResp := "{\"Error\":\"Failed to get state for " + account + "\"}"
+                 return nil, err
         }
-        if accountValueBytes == nil {
+      /*  if accountValueBytes == nil {
                 jsonResp := "{\"Error\":\"Nil amount for " + account + "\"}"
                 return nil, errors.New(jsonResp)
         }
