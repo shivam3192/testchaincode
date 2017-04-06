@@ -66,7 +66,7 @@ var account string
           account = args[0]
 
          recordByte, err := stub.GetState(account);
-        fmt.println("here);
+        fmt.println("here");
         if err != nil {
 
             return nil, err
