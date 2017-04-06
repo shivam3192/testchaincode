@@ -66,6 +66,7 @@ var account string
           account = args[0]
 
          recordByte, err := stub.GetState(account);
+        fmt.println("here);
         if err != nil {
 
             return nil, err
@@ -75,6 +76,7 @@ var account string
         if errrecordmarshal != nil {
             return nil, errrecordmarshal
         }
+                    fmt.println(record.qrcode)
         record.qrcode = append(record.qrcode,args[1]);
         record.count = append(record.count,args[2]);
         newrecordByte, err := json.Marshal(record);
