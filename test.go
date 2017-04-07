@@ -34,12 +34,12 @@ func (t *CrowdFundChaincode) Init(stub shim.ChaincodeStubInterface, function str
                 return nil, errors.New("Incorrect number of arguments. Expecting 2.")
         }
 
-        information := Info{}
-        informationbyte, err := json.Marshal(information)
+     //   information := Info{}
+       // informationbyte, err := json.Marshal(information)
      if err!=nil {
                         return nil, err
                 }
-                err=stub.PutState("default",informationbyte)
+                err=stub.PutState("default",args[0],args[1])
          if err!=nil {
                         return nil, err
                 }
