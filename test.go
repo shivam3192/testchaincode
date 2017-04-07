@@ -75,16 +75,20 @@ var account string
           account = args[0]
 
          recordByte, err := stub.GetState(account);
-   
+     
         if err != nil {
 
             return nil, err
         }
         record := Info{}
+        if recordByte != nil {
         errrecordmarshal := json.Unmarshal(recordByte,&record);
         if errrecordmarshal != nil {
             return nil, errrecordmarshal
+        }    
+               
         }
+       
             
         record.qrcode = append(record.qrcode,args[1]);
         record.count = append(record.count,args[2]);
