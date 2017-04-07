@@ -39,7 +39,16 @@ func (t *CrowdFundChaincode) Init(stub shim.ChaincodeStubInterface, function str
      if err!=nil {
                         return nil, err
                 }
-                err=stub.PutState("default",args[0],args[1])
+         record := Info{}
+       // errrecordmarshal := json.Unmarshal(recordByte,&record);
+        record.qrcode=append(record.qrcode,"aaaa");
+        record.count=append(record.count,"aasss");
+        newrecordByte, err := json.Marshal(record);
+        if err!=nil {
+
+            return nil, err
+        }
+                err=stub.PutState("default",newrecordByte);
          if err!=nil {
                         return nil, err
                 }
