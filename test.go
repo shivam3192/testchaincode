@@ -13,8 +13,8 @@ type CrowdFundChaincode struct {
 }
 type Info struct {
 
-        qrcode []string   `json:"qrcode"`
-        count  []string   `json:"count"`
+        Qrcode []string   `json:"qrcode"`
+        Count  []string   `json:"count"`
 
 
 }
@@ -41,8 +41,8 @@ func (t *CrowdFundChaincode) Init(stub shim.ChaincodeStubInterface, function str
                 }
          record := Info{}
        // errrecordmarshal := json.Unmarshal(recordByte,&record);
-        record.qrcode=append(record.qrcode,"aaaa");
-        record.count=append(record.count,"aasss");
+        record.Qrcode=append(record.Qrcode,"aaaa");
+        record.Count=append(record.Count,"aasss");
         newrecordByte, err := json.Marshal(record);
         if err!=nil {
 
@@ -90,8 +90,8 @@ var account string
         }
        
             
-        record.qrcode = append(record.qrcode,args[1]);
-        record.count = append(record.count,args[2]);
+        record.Qrcode = append(record.Qrcode,args[1]);
+        record.Count = append(record.Count,args[2]);
         newrecordByte, err := json.Marshal(record);
         if err!=nil {
 
