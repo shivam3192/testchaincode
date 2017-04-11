@@ -14,8 +14,9 @@ type CrowdFundChaincode struct {
 type Info struct {
 
         Qrcode []string   `json:"qrcode"`
-        Count  []string   `json:"count"`
-
+        TimeStamp []string `json:"timestamp"`
+        Place  []string   `json:"place"`
+        Success []string `json:"success"`
 
 }
 //
@@ -42,7 +43,9 @@ func (t *CrowdFundChaincode) Init(stub shim.ChaincodeStubInterface, function str
          record := Info{}
        // errrecordmarshal := json.Unmarshal(recordByte,&record);
         record.Qrcode=append(record.Qrcode,"aaaa");
-        record.Count=append(record.Count,"aasss");
+        record.TimeStamp=append(record.TimeStamp,"aasss");
+        record.Place=append(record.Place,"aaaaaa");
+        record.Success=append(record.Success,"aasdff");
         newrecordByte, err := json.Marshal(record);
         if err!=nil {
 
@@ -69,7 +72,7 @@ var account string
 
         var err error
 
-        if len(args) != 3 {
+        if len(args) != 5 {
                 return nil, errors.New("Incorrect number of arguments. Expecting 2.")
         }
           account = args[0]
@@ -91,7 +94,9 @@ var account string
        
             
         record.Qrcode = append(record.Qrcode,args[1]);
-        record.Count = append(record.Count,args[2]);
+        record.TimeStamp = append(record.TimeStamp,args[2]);
+        record.Place=append(record.Place,args[3]);
+        record.Success=append(record.Success,args[4]);
         newrecordByte, err := json.Marshal(record);
         if err!=nil {
 
